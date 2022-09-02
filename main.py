@@ -51,10 +51,18 @@ def test_pillow():
         ParsedPillows.loc[len(ParsedPillows)] = ParsedPillow
     print(ParsedPillows.head())
 
-    print(correctmatch.uniqueness(ParsedPillows.values))
-    fitted_model = correctmatch.fit_model(ParsedPillows.values)
-    fitted_ParsedPillows = correctmatch.sample_model(fitted_model, ParsedPillows.shape[0])
-    print(correctmatch.uniqueness(fitted_ParsedPillows))
+    # print(correctmatch.uniqueness(ParsedPillows.values))
+    # fitted_model = correctmatch.fit_model(ParsedPillows.values)
+    # fitted_ParsedPillows = correctmatch.sample_model(fitted_model, ParsedPillows.shape[0])
+    # print(correctmatch.uniqueness(fitted_ParsedPillows))
+
+    for i in range(8, 0, -1):
+        ParsedPillows = ParsedPillows.drop(columns=ParsedPillows.columns[[i]])
+        print(ParsedPillows.columns)
+        print("ParsedPillows Origin:", correctmatch.uniqueness(ParsedPillows.values))
+        fitted_model = correctmatch.fit_model(ParsedPillows.values)
+        fitted_ParsedPillows = correctmatch.sample_model(fitted_model, ParsedPillows.shape[0])
+        print("ParsedPillows Fitted:", correctmatch.uniqueness(fitted_ParsedPillows))
 
 
 def test_adults():
